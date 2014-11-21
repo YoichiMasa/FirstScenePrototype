@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="h:\Documents\FirstScenePrototype-master\Assets\ItemInventoryScripts\Food.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\HealthStaminaController.cs">
     <Files>
-      <File FileName="\\srvfile02\Home-Students\ljamil1992\Documents\FirstScenePrototype-master\Assets\Scripts\HealthStaminaController.cs" Line="1" Column="1" />
-      <File FileName="h:\Documents\FirstScenePrototype-master\Assets\ItemInventoryScripts\Food.cs" Line="1" Column="7" />
+      <File FileName="Assets\Scripts\HealthStaminaController.cs" Line="136" Column="73" />
+      <File FileName="Assets\ItemInventoryScripts\ItemManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
