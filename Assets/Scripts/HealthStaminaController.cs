@@ -1,6 +1,6 @@
-﻿	using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
-
+using System;
 public class HealthStaminaController : MonoBehaviour {
 
 	public PlayerMovement player;
@@ -30,15 +30,17 @@ public class HealthStaminaController : MonoBehaviour {
 	public Material mat3;
 
 	//screen coodinates and dimensions
-	public float x1 = 0;
-	public float y1 = 0;
-	public float w1;
-	public float h1;
+//	public float x1 = 0;
+//	public float y1 = 0;
+//	public float w1;
+//	public float h1;
+	public Rect hpBarRect;
 
-	public float x2 = 0;
-	public float y2 = 0;
-	public float w2;
-	public float h2;
+//	public float x2 = 0;
+//	public float y2 = 0;
+//	public float w2;
+//	public float h2;
+	public Rect stamBarRect;
 
 	public Vector2 textHP;
 	public Vector2 textStamina;
@@ -51,7 +53,7 @@ public class HealthStaminaController : MonoBehaviour {
 	public GUIText HealthGUI;
 	public GUIText StaminaGUI;
 
-	int defaultScreen = 1200;
+	float defaultScreen = 1200f;
 	
 
 	// Use this for initialization
@@ -97,24 +99,24 @@ public class HealthStaminaController : MonoBehaviour {
 		GUIStyle stam = HpStam.GetStyle ("Stamina");
 		if(Event.current.type.Equals(EventType.Repaint))
 		{
-			Rect box3 = new Rect (Screen.width/2 - Screen.width*x1, Screen.height - Screen.height *y1, Screen.width*w1, Screen.height*h1);
+			Rect box3 = new Rect (Screen.width/2 - Screen.width*hpBarRect.x, Screen.height - Screen.height *hpBarRect.y, Screen.width*hpBarRect.width, Screen.height*hpBarRect.height);
 			Graphics.DrawTexture (box3, backing, mat3);
 			
-			Rect box4 = new Rect (Screen.width/2 - Screen.width*x2, Screen.height - Screen.height *y2, Screen.width*w2, Screen.height*h2);
+			Rect box4 = new Rect (Screen.width/2 - Screen.width*stamBarRect.x, Screen.height - Screen.height *stamBarRect.y, Screen.width*stamBarRect.width, Screen.height*stamBarRect.height);
 			Graphics.DrawTexture (box4, backing, mat3);
 
 
 
-			Rect box1 = new Rect(Screen.width/2 - Screen.width*x1, Screen.height - Screen.height *y1, Screen.width*w1, Screen.height*h1);
+			Rect box1 = new Rect(Screen.width/2 - Screen.width*hpBarRect.x, Screen.height - Screen.height *hpBarRect.y, Screen.width*hpBarRect.width, Screen.height*hpBarRect.height);
 			Graphics.DrawTexture(box1, HPBar, mat1);
 
-			Rect box2 = new Rect(Screen.width/2 - Screen.width*x2, Screen.height - Screen.height *y2, Screen.width*w2, Screen.height*h2);
+			Rect box2 = new Rect(Screen.width/2 - Screen.width*stamBarRect.x, Screen.height - Screen.height *stamBarRect.y, Screen.width*stamBarRect.width, Screen.height*stamBarRect.height);
 			Graphics.DrawTexture(box2, StaminaBar, mat2);
 
 
 			//Health
 			hp.fontSize = (int)(getScale() * 60f);
-			Rect hpText = new Rect(Screen.width/2 - Screen.width*textHP.x, Screen.height - Screen.height *textHP.y, Screen.width*w1, Screen.height*h1);
+			Rect hpText = new Rect(Screen.width/2 - Screen.width*textHP.x, Screen.height - Screen.height *textHP.y, Screen.width*hpBarRect.width, Screen.height*hpBarRect.height);
 			if(HP == maxHP)
 			{
 				GUI.Label(hpText, ""+HP+" |", HpStam.GetStyle("HP"));
@@ -130,14 +132,14 @@ public class HealthStaminaController : MonoBehaviour {
 
 			//Stamina
 			stam.fontSize = (int)(getScale() * 60f);
-			Rect staminaText = new Rect(Screen.width/2 - Screen.width*textStamina.x, Screen.height - Screen.height *textStamina.y, Screen.width*w1, Screen.height*h1);
+			Rect staminaText = new Rect(Screen.width/2 - Screen.width*textStamina.x, Screen.height - Screen.height *textStamina.y, Screen.width*stamBarRect.width, Screen.height*stamBarRect.height);
 			if(stamina == maxStamina)
 			{
 				GUI.Label (staminaText, ""+((stamina/maxStamina)*100)+".0% |", stam);
 			}
 			else
 			{
-				GUI.Label (staminaText, ""+((stamina/maxStamina)*100)+"% |", stam);
+				GUI.Label (staminaText, ""+(float)Math.Round((double)(stamina/maxStamina)*100f,2)+"% |", stam);
 			}
 		}
 	}
