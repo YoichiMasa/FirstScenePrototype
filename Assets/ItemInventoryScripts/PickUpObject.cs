@@ -6,14 +6,14 @@ public class PickUpObject : MonoBehaviour {
 	public bool hasCollided = false;
 	string labelText = "";
 	public PlayerInventory player;
-	public ItemManager im;
 	Item item;
 	public int itemID;
-	void OnStart()
+
+	void Start()
 	{
 		player = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerInventory>();
-		im = ItemManager.getInstance;
 	}
+
 	void OnCollisionEnter(Collision col)
 	{
 		if(col.transform.tag == "Player")
@@ -23,6 +23,13 @@ public class PickUpObject : MonoBehaviour {
 		}
 	}
 
+	void OnCollisionExit(Collision col)
+	{
+		if(col.transform.tag == "Player")
+		{
+			hasCollided = false;
+		}
+	}
 	// Update is called once per frame
 	void Update () 
 	{
@@ -37,7 +44,6 @@ public class PickUpObject : MonoBehaviour {
 
 	void pickUp()
 	{
-		//item = im.SearchNewItem (itemID);
 		player.AddItemToInventory (itemID);
 		GameObject.Destroy(this.gameObject);
 	}

@@ -23,6 +23,7 @@ public class Food: Item
 		itemBaseWeight = baseWeight;
 		itemHeight = height;
 		itemWidth = width;
+		itemType = type;
 		baseHeal = heal;
 	}
 

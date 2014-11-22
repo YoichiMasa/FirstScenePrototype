@@ -297,7 +297,7 @@ public class PlayerInventory : MonoBehaviour
 					"\n\n Damage: " + weapon.wpnBaseDamage +
 					"\n\n Durability: " + weapon.wpnBaseDurability;
 		}
-		else if (item.GetType () == typeof(Food)) 
+		else if (item.itemType == Item.ItemType.Food) 
 		{
 			Food food = (Food)item;
 			toolTip = food.itemName + "\n\n" + food.itemDescription + 
