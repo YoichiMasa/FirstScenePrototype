@@ -6,41 +6,48 @@ public class PickUpObject : MonoBehaviour {
 	public bool hasCollided = false;
 	string labelText = "";
 	public PlayerInventory player;
+	public PlayerMovement move;
 	Item item;
 	public int itemID;
 
 	void Start()
 	{
 		player = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerInventory>();
+		move = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
 	}
 
-	void OnCollisionEnter(Collision col)
+	void OnTriggerStay(Collider col)
 	{
 		if(col.transform.tag == "Player")
 		{
-			hasCollided = true;
-			labelText = "Pick up: E";
-		}
-	}
-
-	void OnCollisionExit(Collision col)
-	{
-		if(col.transform.tag == "Player")
-		{
-			hasCollided = false;
-		}
-	}
-	// Update is called once per frame
-	void Update () 
-	{
-		if(hasCollided == true)
-		{
+//			hasCollided = true;
+//			labelText = "Pick up: E";
+			Instantiate (move.deathParticles, transform.position, Quaternion.identity);
 			if(Input.GetKeyDown(KeyCode.F))
 			{
 				pickUp();
 			}
 		}
 	}
+
+//	void OnTriggerExit(Collider col)
+//	{
+//		if(col.transform.tag == "Player")
+//		{
+//			hasCollided = false;
+//		}
+//	}
+	// Update is called once per frame
+//	void Update () 
+//	{
+//		if(hasCollided == true)
+//		{
+//			if(Input.GetKeyDown(KeyCode.F))
+//			{
+//				pickUp();
+//			}
+//		}
+//	}
 
 	void pickUp()
 	{

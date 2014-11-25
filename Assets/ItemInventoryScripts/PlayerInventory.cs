@@ -7,7 +7,7 @@ public class PlayerInventory : MonoBehaviour
 	public Texture defaultTexture;
 	public List<Item> myInventory = new List<Item> ();
 	public int weightLimit;
-	public int currentWeight;
+	public int currentWeight = 0;
 	int gridWidth = 10;
 	int gridHeight = 10;
 	int defaultScreenX = 1366;
@@ -18,6 +18,7 @@ public class PlayerInventory : MonoBehaviour
 	private bool showInventory = false;
 	private bool showTooltip = false;
 	private string toolTip;
+	public GUISkin weightGUI;
 
 
 	void Start()
@@ -72,6 +73,7 @@ public class PlayerInventory : MonoBehaviour
 	
 	public int AddItemToInventory(int itemID)
 	{
+
 		int intialIndexLocation = -1;   //Set the initial position out of the inventory range. This will get set to the first empty slot we encounter and then reset if there aren't enough slots from that point
 		//Add item in
 		if(itemID != 0)
@@ -219,10 +221,14 @@ public class PlayerInventory : MonoBehaviour
 	
 	void OnGUI()
 	{	
+		GUI.skin = weightGUI;
 		toolTip = "";
+		Rect weight = new Rect(Screen.width / 2 - Screen.width * .139f, Screen.height / 2 - Screen.height * .34f, Screen.width * .06f, Screen.height * .06f);
 		if(showInventory)
 		{
 			DrawInventory();
+
+			GUI.Label (weight, "Weight: " + currentWeight, weightGUI.GetStyle("Weight")); 
 			if (showTooltip) 
 			{
 				GUI.Box (new Rect(Event.current.mousePosition.x, Event.current.mousePosition.y, 200, 200), toolTip);

@@ -17,7 +17,7 @@ public class LadderScript : MonoBehaviour {
 		{
 			player.offLadder = false;
 			player.rigidbody.useGravity = false;
-			float ladderX = gameObject.transform.position.x;
+			float ladderX = gameObject.transform.position.x+col.transform.localScale.x/2;
 			float ladderY = col.gameObject.transform.position.y;
 			float ladderZ = gameObject.transform.position.z;
 			col.gameObject.transform.position = new Vector3(ladderX, ladderY, ladderZ);
