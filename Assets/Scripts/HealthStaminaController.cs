@@ -20,6 +20,7 @@ public class HealthStaminaController : MonoBehaviour {
 	public float baseJump = 2f;
 	public float baseClimb = 0.1f;
 	public float baseAttack;
+	public readonly float origMove = .05f;
 
 	//visuals
 	public Texture2D HPBar;
@@ -65,8 +66,10 @@ public class HealthStaminaController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (player.alive == true) {
+	void Update () 
+	{
+		if (player.alive == true) 
+		{
 						//for Animating Health and Stamina Bars
 						healthy = (1 - (HP / maxHP));
 						//		if(healthy == 0f){
@@ -79,18 +82,22 @@ public class HealthStaminaController : MonoBehaviour {
 						//			energized = 0.1f;
 						//		}
 						mat2.SetFloat ("_Cutoff", energized);
-
+						
+						//Idle
+						if (stamina > minStamina)
+						{
+							stamina = stamina - ((baseIdle + baseIdle*(float)inven.currentWeight/inven.weightLimit)*Time.deltaTime);
+						}
 						//Moving
 						if (player.rigidbody.velocity != Vector3.zero) 
 						{
-							stamina = stamina - ((float)((baseMove + baseMove*(inven.currentWeight/inven.weightLimit)))*Time.deltaTime);
+							stamina = stamina - ((baseMove + baseMove*(float)inven.currentWeight/inven.weightLimit)*Time.deltaTime);
 						}
-						if (stamina <= 0) {
-								HP -= .01f;
+						if (stamina <= 0) 
+						{
+							HP -= (1f * Time.deltaTime / 3f);
 						}
-				}
-
-
+		}
 	}
 
 	void OnGUI() {

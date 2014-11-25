@@ -44,7 +44,23 @@ public class PickUpObject : MonoBehaviour {
 
 	void pickUp()
 	{
-		player.AddItemToInventory (itemID);
-		GameObject.Destroy(this.gameObject);
+		ItemManager im = ItemManager.getInstance;
+		Item item = im.SearchNewItem(itemID);
+		if(player.checkWeight(item))
+		{
+			if(player.AddItemToInventory(itemID) > -1)
+			{
+				//player.AddItemToInventory (itemID);
+				GameObject.Destroy(this.gameObject);
+			}
+			else
+			{
+				Debug.Log("Pack is full");
+			}
+		}
+		else
+		{
+			Debug.Log("It's getting too heavy");
+		}
 	}
 }

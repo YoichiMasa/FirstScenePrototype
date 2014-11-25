@@ -89,6 +89,7 @@ public class PlayerMovement : MonoBehaviour {
 								if (Input.GetKeyUp (KeyCode.LeftAlt)) {
 										maxMoveSpeed = baseMaxSpeed;
 										moveSpeed = baseSpeed;
+										bars.baseMove = bars.origMove;
 								}
 						}
 						if (bars.HP <= 0) {

@@ -6,8 +6,8 @@ public class PlayerInventory : MonoBehaviour
 {
 	public Texture defaultTexture;
 	public List<Item> myInventory = new List<Item> ();
-	public int weightLimit = 100;
-	public int currentWeight = 0;
+	public int weightLimit;
+	public int currentWeight;
 	int gridWidth = 10;
 	int gridHeight = 10;
 	int defaultScreenX = 1366;
@@ -33,7 +33,7 @@ public class PlayerInventory : MonoBehaviour
 		im.createDatabase();
 		defaultTexture = Resources.Load<Texture> ("ItemIcons/Name");
 		AddItemToInventory (200);
-//		AddItemToInventory (101);
+		AddItemToInventory (201);
 //		AddItemToInventory (200);
 //		AddItemToInventory (100);
 //		AddItemToInventory (101);
@@ -86,30 +86,30 @@ public class PlayerInventory : MonoBehaviour
 					//between the item's height and width from the intialIndexLocation
 					int count = 0;                                      //This gets incremented each time we encounter an empty space.
 					//It gets reset if there aren't enough empty spaces between the item's height and width from the intialIndexLocation
-					for(int i = 0; i < gridWidth-(temp.itemWidth-1); i ++)  //Iterate through the width of the grid, excluding spaces width-1 from the edge
+					for(int i = 0; i < gridHeight-(temp.itemHeight-1); i ++)  //Iterate through the width of the grid, excluding spaces width-1 from the edge
 					{
-						for(int t = 0; t < (gridHeight)-(temp.itemHeight-1); t++)       //Iterate through the height of the grid, excluding spaces height-1 from the edge
+						for(int t = 0; t < (gridWidth)-(temp.itemWidth-1); t++)       //Iterate through the height of the grid, excluding spaces height-1 from the edge
 						{
 							//print ("ItemWidth: " + temp.itemWidth);	
 //							print ("Location: " + i+(gridHeight*t));
-							if(myInventory[i+(gridHeight*t)].itemID == 0 && !canFit)      //If the slot at i(itemWidth) + (totalheight * t(heightLoop) is null  canFit is still false (This goes down the columns first, then goes to the next row)
+							if(myInventory[t+(gridWidth*i)].itemID == 0 && !canFit)      //If the slot at i(itemWidth) + (totalheight * t(heightLoop) is null  canFit is still false (This goes down the columns first, then goes to the next row)
 							{
 								int neededCount = temp.itemHeight*temp.itemWidth;           //The amount of slots needed for the item to fit
-								for(int j = 0; j < temp.itemWidth; j++)                 //Loop through the required spaces for the item width
+								for(int j = 0; j < temp.itemHeight; j++)                 //Loop through the required spaces for the item width
 								{
-									if(myInventory[i+(gridHeight*t) + j].itemID == 0 && !canFit)  //If the space at i(widthLoop) + j(itemWidthLoop) + (Totalheight * t(heightLoop) + k(itemHeightLoop)) is null
+									if(myInventory[t+(gridWidth*i) + j].itemID == 0 && !canFit)  //If the space at i(widthLoop) + j(itemWidthLoop) + (Totalheight * t(heightLoop) + k(itemHeightLoop)) is null
 										//and we aren't sure if we can fit yet
 									{
 										//valid width for the location
-										for( int k = 0; k < temp.itemHeight; k++)                   //Loop through the require spaces for the item height
+										for( int k = 0; k < temp.itemWidth; k++)                   //Loop through the require spaces for the item height
 										{
-											if(myInventory[i+(gridHeight*(t+k)) + j].itemID == 0)   //If the slot at i(widthLoop) + j(itemWidthLoop) + (Totalheight * t(heightLoop) + k(itemHeightLoop)) is null...
+											if(myInventory[t+(gridWidth*(i+k)) + j].itemID == 0)   //If the slot at i(widthLoop) + j(itemWidthLoop) + (Totalheight * t(heightLoop) + k(itemHeightLoop)) is null...
 											{
 												if(firstFoundLocation)                          //If this is the first found empty space...
 												{
 													firstFoundLocation = false;                 //Turn off firstFoundLocation for now so we don't continually reset our intialIndexLocation.
 													//We'll turn this off later if it turns out that there aren't enough spaces
-													intialIndexLocation = i+(gridWidth*t);      //Set our initial position. If it turns out that there aren't enough spaces, we'll reset it to -1 below
+													intialIndexLocation = t+(gridHeight*i);      //Set our initial position. If it turns out that there aren't enough spaces, we'll reset it to -1 below
 												}
 												//Valid Height for the location.. Place it here.
 												count+=1;                                       //Add 1 to our count for each empty space we find
@@ -144,21 +144,21 @@ public class PlayerInventory : MonoBehaviour
 				}
 				if(intialIndexLocation > -1)    //If our initialindexlocation is in range, set the spaces equal the the item
 				{
-					for(int i = 0; i < temp.itemWidth; i++)
+					for(int i = 0; i < temp.itemHeight; i++)
 					{
-						for(int t = 0; t < temp.itemHeight; t++)
+						for(int t = 0; t < temp.itemWidth; t++)
 						{
 							if(i == 0 && t == 0)
 							{
 								Item clone = (Item)Instantiate(temp);
 								clone.itemIcon = im.getIcon(clone.itemName);
-								myInventory[intialIndexLocation+i+(gridHeight*t)] = clone;
+								myInventory[intialIndexLocation+t+(gridHeight*i)] = clone;
 								currentWeight = currentWeight + clone.itemBaseWeight;
 							}
 							else if (i > 0 || t > 0)
 							{
 								//temp.isFilled = true;
-								myInventory[intialIndexLocation+i+(gridHeight*t)] = temp;
+								myInventory[intialIndexLocation+t+(gridHeight*i)] = temp;
 							}
 						}
 					}
@@ -180,13 +180,13 @@ public class PlayerInventory : MonoBehaviour
 		{
 			Item temp =   item;      //Set up a temporary item to compare with
 			
-			for(int i = 0; i < gridWidth; i ++)                 //Iterate through the width of the grid
+			for(int i = 0; i < gridHeight; i ++)                 //Iterate through the width of the grid
 			{
-				for(int t = 0; t < (gridHeight); t++)   //Iterate through the height of the grid
+				for(int t = 0; t < (gridWidth); t++)   //Iterate through the height of the grid
 				{
-					if(myInventory[i+(gridHeight*t)] == item)   //If the slot at widthLoop + (heightTotal * t(heightLoop) is null  canFit is still false (This goes down the columns first, then goes to the next row)
+					if(myInventory[t+(gridHeight*i)] == item)   //If the slot at widthLoop + (heightTotal * t(heightLoop) is null  canFit is still false (This goes down the columns first, then goes to the next row)
 					{
-						intialIndexLocation = i+(gridHeight*t); //We found the first slot for the item, so break out of the loop
+						intialIndexLocation = t+(gridHeight*i); //We found the first slot for the item, so break out of the loop
 						break;
 						
 					}
@@ -199,14 +199,14 @@ public class PlayerInventory : MonoBehaviour
 			
 			if(intialIndexLocation > -1)    //If our initialindexlocation is in range, set the spaces equal to the item width and height
 			{
-				for(int i = 0; i < temp.itemWidth; i++) //Loop through the spaces from the initalIndexLocation to the width of the item
+				for(int i = 0; i < temp.itemHeight; i++) //Loop through the spaces from the initalIndexLocation to the width of the item
 				{
-					for(int t = 0; t < temp.itemHeight; t++)    //Loop through the spaces from the initalIndexLocation to the height of the item
+					for(int t = 0; t < temp.itemWidth; t++)    //Loop through the spaces from the initalIndexLocation to the height of the item
 					{
-						myInventory[intialIndexLocation+i+(gridHeight*t)] = (Item) ScriptableObject.CreateInstance<Item>();   //And set those spaces equal to null
-						currentWeight = currentWeight - item.itemBaseWeight;
+						myInventory[intialIndexLocation+t+(gridHeight*i)] = (Item) ScriptableObject.CreateInstance<Item>();   //And set those spaces equal to null
 					}
 				}
+				currentWeight = currentWeight - item.itemBaseWeight;
 			}
 
 		}
@@ -276,7 +276,7 @@ public class PlayerInventory : MonoBehaviour
 
 				}
 			
-				Rect toolTipRect = new Rect((100+(i*30)), 100+(t*30), 30, 30);
+				Rect toolTipRect = new Rect((offSetX+(i*sfactor)), offSetY+(t*sfactor), sfactor, sfactor);
 				if(toolTipRect.Contains (Event.current.mousePosition) && myInventory[i+(gridHeight*t)].itemID != 0)
 				{
 					toolTip = CreateTooltip (myInventory[i+(gridHeight*t)]);

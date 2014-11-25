@@ -25,10 +25,9 @@ public class ItemManager{
 
 	public void createDatabase()
 	{
-		instance = this;
-		Food newFood = (Food)ScriptableObject.CreateInstance<Food> ();
-		newFood.ConfigureFood ("Cheese", 200, "Oooh, Cheese!", 5, 3, 2, Item.ItemType.Food, 10);
-		addItem (newFood);
+		addItem (createFood("Cheese", 200, "Oooh, Cheese!", 5, 3, 2, Item.ItemType.Food, 10));
+		//newFood.ConfigureFood ("Cheese Wheel", 201, "Whole lotta cheese", 10, 3, 3, Item.ItemType.Food, 20);
+		addItem (createFood("Cheese Wheel", 201, "Whole lotta cheese", 10, 3, 3, Item.ItemType.Food, 20));
 		for (int i = 0; i < itemDatabase.Count; i++) 
 		{
 			itemDatabase[i].itemIcon = getIcon(itemDatabase[i].itemName);
@@ -40,6 +39,13 @@ public class ItemManager{
 	public void addItem(Item item)
 	{
 		itemDatabase.Add (item);
+	}
+
+	Food createFood(string name, int ID, string description, int baseWeight, int height, int width, Item.ItemType type, int heal)
+	{
+		Food newFood = (Food)ScriptableObject.CreateInstance<Food> ();
+		newFood.ConfigureFood (name, ID, description, baseWeight, height, width, type, heal);
+		return newFood;
 	}
 
 	public Item SearchNewItem(int newItem)
