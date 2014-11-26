@@ -6,7 +6,6 @@ public class HealthStaminaController : MonoBehaviour {
 	public PlayerMovement player;
 	public PlayerInventory inven;
 	public GUISkin HpStam;
-	GameObject hpSys;
 	public float HP = 100f;
 	public float maxHP = 100f;
 	public float stamina = 1000f;
@@ -61,8 +60,7 @@ public class HealthStaminaController : MonoBehaviour {
 	void Start () 
 	{
 		player = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerMovement> ();
-		inven = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerInventory> ();
-		hpSys = GameObject.FindGameObjectWithTag ("HPSYS");
+		inven = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerInventory> (); 
 	}
 	
 	// Update is called once per frame

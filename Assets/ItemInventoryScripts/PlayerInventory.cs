@@ -10,10 +10,6 @@ public class PlayerInventory : MonoBehaviour
 	public int currentWeight = 0;
 	int gridWidth = 10;
 	int gridHeight = 10;
-	int defaultScreenX = 1366;
-	int defaultScreenY = 768;
-	Vector2 screen;
-	private Vector2 scale;
 	private ItemManager im;
 	private bool showInventory = false;
 	private bool showTooltip = false;
@@ -32,6 +28,7 @@ public class PlayerInventory : MonoBehaviour
 			//[gridWidth*gridHeight];// I like to use a single dimension array.
 		im = ItemManager.getInstance;
 		im.createDatabase();
+		weightGUI = Resources.Load<GUISkin>("GUI Skin");
 		defaultTexture = Resources.Load<Texture> ("ItemIcons/Name");
 		AddItemToInventory (200);
 		AddItemToInventory (201);
@@ -222,13 +219,19 @@ public class PlayerInventory : MonoBehaviour
 	void OnGUI()
 	{	
 		GUI.skin = weightGUI;
+
 		toolTip = "";
-		Rect weight = new Rect(Screen.width / 2 - Screen.width * .139f, Screen.height / 2 - Screen.height * .34f, Screen.width * .06f, Screen.height * .06f);
+		 
 		if(showInventory)
 		{
 			DrawInventory();
-
-			GUI.Label (weight, "Weight: " + currentWeight, weightGUI.GetStyle("Weight")); 
+			GUIStyle w = weightGUI.GetStyle ("Weight");
+			Rect weightRect = new Rect(Screen.width / 2 - Screen.width * .139f, Screen.height / 2 - Screen.height * .34f, Screen.width * .06f, Screen.height * .06f);
+			w.fontSize = (int)((Screen.height / 1200f) * 60f);
+			if(Event.current.type.Equals(EventType.Repaint))
+			{
+				GUI.Label (weightRect, "Weight: " + currentWeight, w); 
+			}
 			if (showTooltip) 
 			{
 				GUI.Box (new Rect(Event.current.mousePosition.x, Event.current.mousePosition.y, 200, 200), toolTip);
@@ -250,8 +253,7 @@ public class PlayerInventory : MonoBehaviour
 //			}
 //
 //		}
-		screen = new Vector2 (Screen.width, Screen.height);
-		scale = new Vector2 (screen.x / defaultScreenX, screen.y / defaultScreenY);
+
 		float sfactor = Screen.height * .06f;
 		float offSetX = Screen.width / 2 - Screen.width * .139f;
 		float offSetY = Screen.height / 2 - Screen.height * .29f;
