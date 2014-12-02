@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\CharacterControllerLogic2.cs" />
      <Compile Include="Assets\Scripts\CliffScript.cs" />
      <Compile Include="Assets\Scripts\Destroy.cs" />
+     <Compile Include="Assets\Scripts\Elevator.cs" />
      <Compile Include="Assets\Scripts\FixedCameraControl.cs" />
      <Compile Include="Assets\Scripts\FollowCam.cs" />
      <Compile Include="Assets\Scripts\HealthStaminaController.cs" />
