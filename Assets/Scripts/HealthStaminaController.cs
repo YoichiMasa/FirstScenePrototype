@@ -10,7 +10,7 @@ public class HealthStaminaController : MonoBehaviour {
 	public float maxHP = 100f;
 	public float stamina = 1000f;
 	public float maxStamina = 1000f;
-	public float minStamina = -1000f;
+	public float minStamina = 0;
 
 	//Base Values for Stamina Consumption
 	public float baseIdle = 1f;
@@ -87,7 +87,7 @@ public class HealthStaminaController : MonoBehaviour {
 							stamina = stamina - ((baseIdle + baseIdle*(float)inven.currentWeight/inven.weightLimit)*Time.deltaTime);
 						}
 						//Moving
-						if (player.rigidbody.velocity != Vector3.zero) 
+						if (player.rigidbody.velocity != Vector3.zero && stamina > minStamina) 
 						{
 							stamina = stamina - ((baseMove + baseMove*(float)inven.currentWeight/inven.weightLimit)*Time.deltaTime);
 						}
@@ -128,11 +128,11 @@ public class HealthStaminaController : MonoBehaviour {
 			}
 			else if(HP < 100 && HP > 9)
 			{
-				GUI.Label(hpText, "0"+HP+" |", HpStam.GetStyle("HP"));
+				GUI.Label(hpText, "| "+(float)Math.Round((double)(HP),2), HpStam.GetStyle("HP"));
 			}
 			else if(HP <= 9)
 			{
-				GUI.Label(hpText, "00"+HP+" |", HpStam.GetStyle("HP"));
+				GUI.Label(hpText, "| "+(float)Math.Round((double)(HP),2), HpStam.GetStyle("HP"));
 			}
 
 			//Stamina
@@ -140,12 +140,17 @@ public class HealthStaminaController : MonoBehaviour {
 			Rect staminaText = new Rect(Screen.width/2 - Screen.width*textStamina.x, Screen.height - Screen.height *textStamina.y, Screen.width*stamBarRect.width, Screen.height*stamBarRect.height);
 			if(stamina == maxStamina)
 			{
-				GUI.Label (staminaText, ""+((stamina/maxStamina)*100)+".0% |", stam);
+				GUI.Label (staminaText, "| "+((stamina/maxStamina)*100)+".0%", stam);
 			}
-			else
+			if(stamina < 0)
+			{
+				GUI.Label (staminaText, "| "+0+".0%", stam);
+			}
+			else if(stamina < maxStamina)
 			{
 				GUI.Label (staminaText, ""+(float)Math.Round((double)(stamina/maxStamina)*100f,2)+"% |", stam);
 			}
+			 
 		}
 	}
 	float getScale()

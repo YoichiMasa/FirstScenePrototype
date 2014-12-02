@@ -55,6 +55,7 @@
      <Compile Include="Assets\ItemInventoryScripts\Weapon.cs" />
      <Compile Include="Assets\Scripts\CameraSwitch.cs" />
      <Compile Include="Assets\Scripts\CharacterControllerLogic2.cs" />
+     <Compile Include="Assets\Scripts\CliffScript.cs" />
      <Compile Include="Assets\Scripts\Destroy.cs" />
      <Compile Include="Assets\Scripts\FixedCameraControl.cs" />
      <Compile Include="Assets\Scripts\FollowCam.cs" />
@@ -65,6 +66,7 @@
      <Compile Include="Assets\Scripts\SavePointRotate.cs" />
      <Compile Include="Assets\Scripts\ThirdPersonCamera.cs" />
      <Compile Include="Assets\Scripts\TrapTrigger.cs" />
+     <Compile Include="Assets\Scripts\WallTrap.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
