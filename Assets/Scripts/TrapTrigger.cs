@@ -43,7 +43,7 @@ public class TrapTrigger : MonoBehaviour {
 			{
 				if(player.velocity.magnitude < 6f)
 				{
-					player.AddForce(Vector3.right*15);
+					player.AddForce(Vector3.up*15);
 				}	
 			}
 			if(Input.anyKeyDown && !waiting)

@@ -22,7 +22,11 @@ public class PickUpObject : MonoBehaviour {
 		{
 //			hasCollided = true;
 //			labelText = "Pick up: E";
+<<<<<<< HEAD
 			//Instantiate (move.deathParticles, transform.position, Quaternion.identity);
+=======
+			Instantiate (move.deathParticles, transform.position, Quaternion.identity);
+>>>>>>> parent of 03547f1... Change Traps, Add Key Item
 			if(Input.GetKeyDown(KeyCode.F))
 			{
 				pickUp();
