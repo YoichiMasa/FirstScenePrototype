@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 public class PickUpObject : MonoBehaviour {
-	RaycastHit	hit;
-	public bool hasCollided = false;
-	string labelText = "";
 	public PlayerInventory player;
 	public PlayerMovement move;
 	Item item;
 	public int itemID;
+	public ParticleSystem interactable;
+	public bool isFull = false;
+	bool tooHeavy = false;
+	Rect windowRect = new Rect(Screen.width/2, Screen.height/2, 200f, 200f);
 
 	void Start()
 	{
@@ -20,13 +21,6 @@ public class PickUpObject : MonoBehaviour {
 	{
 		if(col.transform.tag == "Player")
 		{
-//			hasCollided = true;
-//			labelText = "Pick up: E";
-<<<<<<< HEAD
-			//Instantiate (move.deathParticles, transform.position, Quaternion.identity);
-=======
-			Instantiate (move.deathParticles, transform.position, Quaternion.identity);
->>>>>>> parent of 03547f1... Change Traps, Add Key Item
 			if(Input.GetKeyDown(KeyCode.F))
 			{
 				pickUp();

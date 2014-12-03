@@ -1,17 +1,25 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 <<<<<<< HEAD
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\AttackPlayer.cs">
     <Files>
 =======
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TrapTrigger.cs">
     <Files>
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TrapTrigger.cs">
+    <Files>
+>>>>>>> parent of 03547f1... Change Traps, Add Key Item
       <File FileName="Assets\Scripts\TrapTrigger.cs" Line="46" Column="32" />
       <File FileName="Assets\ItemInventoryScripts\PlayerInventory.cs" Line="30" Column="23" />
       <File FileName="Assets\ItemInventoryScripts\ItemManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\HealthStaminaController.cs" Line="1" Column="1" />
       <File FileName="Assets\ItemInventoryScripts\PickUpObject.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerMovement.cs" Line="22" Column="2" />
+<<<<<<< HEAD
+>>>>>>> parent of 03547f1... Change Traps, Add Key Item
+=======
 >>>>>>> parent of 03547f1... Change Traps, Add Key Item
       <File FileName="Assets\Scripts\LadderScript.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Elevator.cs" Line="1" Column="1" />
@@ -24,10 +32,13 @@
       <File FileName="Assets\Scripts\FollowCam.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\FixedCameraControl.cs" Line="1" Column="1" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <File FileName="Assets\Scripts\ThirdPersonCamera.cs" Line="1" Column="1" />
       <File FileName="Assets\Waypoint.cs" Line="1" Column="1" />
       <File FileName="Assets\PlayerLocation.cs" Line="6" Column="34" />
       <File FileName="Assets\AttackPlayer.cs" Line="79" Column="4" />
+=======
+>>>>>>> parent of 03547f1... Change Traps, Add Key Item
 =======
 >>>>>>> parent of 03547f1... Change Traps, Add Key Item
     </Files>
