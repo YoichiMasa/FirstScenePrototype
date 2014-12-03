@@ -7,8 +7,7 @@ public class Item : ScriptableObject {
 	public enum ItemType
 	{
 		Food,
-		Weapon,
-		KeyItem
+		Weapon
 	}
 	public string itemName = "";
 	public int itemID = 0;

@@ -10,7 +10,7 @@ public class HealthStaminaController : MonoBehaviour {
 	public float maxHP = 100f;
 	public float stamina = 1000f;
 	public float maxStamina = 1000f;
-	public float minStamina = 0;
+	public float minStamina = -1000f;
 
 	//Base Values for Stamina Consumption
 	public float baseIdle = 1f;
@@ -87,7 +87,7 @@ public class HealthStaminaController : MonoBehaviour {
 							stamina = stamina - ((baseIdle + baseIdle*(float)inven.currentWeight/inven.weightLimit)*Time.deltaTime);
 						}
 						//Moving
-						if (player.rigidbody.velocity != Vector3.zero && stamina > minStamina) 
+						if (player.rigidbody.velocity != Vector3.zero) 
 						{
 							stamina = stamina - ((baseMove + baseMove*(float)inven.currentWeight/inven.weightLimit)*Time.deltaTime);
 						}
@@ -124,15 +124,17 @@ public class HealthStaminaController : MonoBehaviour {
 			Rect hpText = new Rect(Screen.width/2 - Screen.width*textHP.x, Screen.height - Screen.height *textHP.y, Screen.width*hpBarRect.width, Screen.height*hpBarRect.height);
 			if(HP == maxHP)
 			{
-				GUI.Label(hpText, ""+HP+" |", HpStam.GetStyle("HP"));
+				GUI.Label(hpText, "| "+HP, HpStam.GetStyle("HP"));
 			}
 			else if(HP < 100 && HP > 9)
 			{
-				GUI.Label(hpText, "| "+(float)Math.Round((double)(HP),2), HpStam.GetStyle("HP"));
+				//GUI.Label(hpText, "0"+HP+" |", HpStam.GetStyle("HP"));
+				GUI.Label(hpText, "| "+(float)Math.Round((double)(HP),2));
 			}
 			else if(HP <= 9)
 			{
-				GUI.Label(hpText, "| "+(float)Math.Round((double)(HP),2), HpStam.GetStyle("HP"));
+				//GUI.Label(hpText, "00"+HP+" |", HpStam.GetStyle("HP"));
+				GUI.Label(hpText, "| "+(float)Math.Round((double)(HP),2));
 			}
 
 			//Stamina
@@ -140,6 +142,7 @@ public class HealthStaminaController : MonoBehaviour {
 			Rect staminaText = new Rect(Screen.width/2 - Screen.width*textStamina.x, Screen.height - Screen.height *textStamina.y, Screen.width*stamBarRect.width, Screen.height*stamBarRect.height);
 			if(stamina == maxStamina)
 			{
+				//GUI.Label (staminaText, ""+((stamina/maxStamina)*100)+".0% |", stam);
 				GUI.Label (staminaText, "| "+((stamina/maxStamina)*100)+".0%", stam);
 			}
 			if(stamina < 0)
@@ -148,9 +151,8 @@ public class HealthStaminaController : MonoBehaviour {
 			}
 			else if(stamina < maxStamina)
 			{
-				GUI.Label (staminaText, ""+(float)Math.Round((double)(stamina/maxStamina)*100f,2)+"% |", stam);
+				GUI.Label (staminaText, "| "+(float)Math.Round((double)(stamina/maxStamina)*100f,2)+"%", stam);
 			}
-			 
 		}
 	}
 	float getScale()

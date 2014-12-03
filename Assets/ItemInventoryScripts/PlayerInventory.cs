@@ -241,6 +241,18 @@ public class PlayerInventory : MonoBehaviour
 		
 	void DrawInventory()
 	{
+//		for(int i = 0; i < myInventory.Count; i++)
+//		{
+//
+//			if(myInventory[i].itemID != 0)
+//			{
+//				if(myInventory[i].isFilled == false)
+//				{
+//					myInventory[i].isFilled = false;
+//				}
+//			}
+//
+//		}
 
 		float sfactor = Screen.height * .06f;
 		float offSetX = Screen.width / 2 - Screen.width * .139f;
@@ -267,6 +279,7 @@ public class PlayerInventory : MonoBehaviour
 							{
 								RemoveItemFromInventory(myInventory[i+(gridHeight*t)]);
 							}
+							//temp.isFilled = true;
 					}
 
 				}
@@ -323,7 +336,7 @@ public class PlayerInventory : MonoBehaviour
 	public bool checkWeight(Item item)
 	{
 		bool notFull = false;
-		if(currentWeight+item.itemBaseWeight <= weightLimit)
+		if(currentWeight+item.itemBaseWeight < weightLimit)
 		{
 			notFull = true;
 		}

@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AttackPlayer.cs" />
      <Compile Include="Assets\ItemInventoryScripts\Food.cs" />
      <Compile Include="Assets\ItemInventoryScripts\Item.cs" />
      <Compile Include="Assets\ItemInventoryScripts\ItemManager.cs" />
@@ -53,9 +54,9 @@
      <Compile Include="Assets\ItemInventoryScripts\PickUpObject.cs" />
      <Compile Include="Assets\ItemInventoryScripts\PlayerInventory.cs" />
      <Compile Include="Assets\ItemInventoryScripts\Weapon.cs" />
+     <Compile Include="Assets\PlayerLocation.cs" />
      <Compile Include="Assets\Scripts\CameraSwitch.cs" />
      <Compile Include="Assets\Scripts\CharacterControllerLogic2.cs" />
-     <Compile Include="Assets\Scripts\CliffScript.cs" />
      <Compile Include="Assets\Scripts\Destroy.cs" />
      <Compile Include="Assets\Scripts\Elevator.cs" />
      <Compile Include="Assets\Scripts\FixedCameraControl.cs" />
@@ -65,9 +66,11 @@
      <Compile Include="Assets\Scripts\Patrol.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\SavePointRotate.cs" />
+     <Compile Include="Assets\Scripts\SaveTele.cs" />
      <Compile Include="Assets\Scripts\ThirdPersonCamera.cs" />
      <Compile Include="Assets\Scripts\TrapTrigger.cs" />
      <Compile Include="Assets\Scripts\WallTrap.cs" />
+     <Compile Include="Assets\WayPoint.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

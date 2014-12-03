@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 public class PickUpObject : MonoBehaviour {
@@ -7,18 +7,13 @@ public class PickUpObject : MonoBehaviour {
 	string labelText = "";
 	public PlayerInventory player;
 	public PlayerMovement move;
-	public ParticleSystem interactable;
 	Item item;
-	public bool isFull = false;
-	bool tooHeavy = false;
-	Rect windowRect = new Rect(Screen.width/2, Screen.height/2, 200f, 200f);
 	public int itemID;
 
 	void Start()
 	{
 		player = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerInventory>();
 		move = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
-		interactable = GameObject.FindGameObjectWithTag ("Interactable").GetComponentInChildren<ParticleSystem> ();
 	}
 
 	void OnTriggerStay(Collider col)
@@ -27,7 +22,7 @@ public class PickUpObject : MonoBehaviour {
 		{
 //			hasCollided = true;
 //			labelText = "Pick up: E";
-			//interactable.Play();
+			//Instantiate (move.deathParticles, transform.position, Quaternion.identity);
 			if(Input.GetKeyDown(KeyCode.F))
 			{
 				pickUp();
@@ -35,19 +30,24 @@ public class PickUpObject : MonoBehaviour {
 		}
 	}
 
-
-	void OnGUI()
-	{
-		if(isFull)
-		{
-			StartCoroutine(ShowMessage("Pack is Full", 2));
-
-		}
-		if(tooHeavy)
-		{
-			StartCoroutine(ShowMessage("Getting too Heavy", 2));
-		}
-	}
+//	void OnTriggerExit(Collider col)
+//	{
+//		if(col.transform.tag == "Player")
+//		{
+//			hasCollided = false;
+//		}
+//	}
+	// Update is called once per frame
+//	void Update () 
+//	{
+//		if(hasCollided == true)
+//		{
+//			if(Input.GetKeyDown(KeyCode.F))
+//			{
+//				pickUp();
+//			}
+//		}
+//	}
 
 	void pickUp()
 	{
@@ -62,25 +62,12 @@ public class PickUpObject : MonoBehaviour {
 			}
 			else
 			{
-				isFull = true;
-
+				Debug.Log("Pack is full");
 			}
 		}
 		else
 		{
-			tooHeavy = true;
-
+			Debug.Log("It's getting too heavy");
 		}
-	}
-
-	IEnumerator ShowMessage(string message, float delay)
-	{
-//		guiText.text = message;
-//		guiText.enabled = true;
-		GUI.Label(windowRect, message, GUI.skin.GetStyle("Weight"));
-		yield return new WaitForSeconds(delay);
-		tooHeavy = false;
-		isFull = false;
-		//guiText.enabled = false;
 	}
 }

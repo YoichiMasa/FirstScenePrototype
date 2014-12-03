@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class WallTrap : MonoBehaviour {
-
+	
 	GameObject player;
 	HealthStaminaController bars;
 	PlayerMovement alive;
-
+	
 	void Start()
 	{
 		player = GameObject.FindGameObjectWithTag ("Player");

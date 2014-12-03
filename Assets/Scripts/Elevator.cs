@@ -3,13 +3,17 @@ using System.Collections;
 
 public class Elevator : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+	Rigidbody platform;
+
+	void Start()
+	{
+		platform = GameObject.FindGameObjectWithTag ("Platform").GetComponent<Rigidbody>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	void OnTriggerStay(Collider col)
+	{
+		if(col.transform.tag == "Player")
+		{
+			platform.AddForce(Vector3.up*20);
+		}
 	}
 }
